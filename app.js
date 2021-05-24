@@ -25,12 +25,16 @@ app.use("/credentials",login);
 const home = require("./routes/Home/init");
 app.use("/home",home);
 
-
 io.on("connection",socket =>{
     console.log("connection made successfull");
+    
     socket.on('message',payload =>{
-        console.log("message received ",payload);
+        console.log("message",payload);
         io.emit('message',payload);
+    });
+
+    socket.on('typing',payload=>{
+        io.emit('typing',payload);
     })
 })
 
