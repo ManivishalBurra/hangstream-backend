@@ -9,6 +9,9 @@ const io = require("socket.io")(server,{
         origin:'*',
     }
 });
+const {
+    userJoin
+} = require("./utils/users")
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -28,14 +31,26 @@ app.use("/home",home);
 io.on("connection",socket =>{
     console.log("connection made successfull");
     
+    socket.on("join_room",payload => {
+        console.log(payload,"payload");
+        const user = userJoin(socket.id,payload.userName,payload.roomId);
+        socket.join(user.room);
+        
+        io.to(user.room).emit('welcome', `${user.username}`);
+    })
+    
     socket.on('message',payload =>{
         console.log("message",payload);
-        io.emit('message',payload);
+        io.to(payload.roomId).emit('message',payload);
     });
 
+    socket.on('timing',payload=>{
+        io.to(payload.roomId).emit('timing',payload);
+    });
     socket.on('typing',payload=>{
-        io.emit('typing',payload);
+        io.to(payload.roomId).emit("typing",payload);
     })
+
 })
 
 

@@ -2,7 +2,7 @@ const app = require("express")();
 const User = require("../../models/user")
 
 app.post("/",(req,res)=>{
-  console.log(req.body);
+  
   User.findOne({email:req.body.email},(err,userfun)=>{
     if(err)
     {
