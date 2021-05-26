@@ -8,7 +8,7 @@ const io = require("socket.io")(server,{
     cors:{
         origin:'*',
     },
-    wsEngine: 'ws'
+    
 });
 const {
     userJoin
