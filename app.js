@@ -7,7 +7,8 @@ const cors = require("cors")
 const io = require("socket.io")(server,{
     cors:{
         origin:'*',
-    }
+    },
+    wsEngine: 'ws'
 });
 const {
     userJoin
