@@ -45,12 +45,12 @@ io.on("connection",socket =>{
         io.to(payload.roomId).emit('message',payload);
     });
 
-    socket.on('timing',payload=>{
-        io.to(payload.roomId).emit('timing',payload);
-    });
-    socket.on('typing',payload=>{
-        io.to(payload.roomId).emit("typing",payload);
-    })
+    // socket.on('timing',payload=>{
+    //     io.to(payload.roomId).emit('timing',payload);
+    // });
+    // socket.on('typing',payload=>{
+    //     io.to(payload.roomId).emit("typing",payload);
+    // })
 
 })
 
