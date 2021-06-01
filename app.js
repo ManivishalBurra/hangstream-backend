@@ -29,6 +29,12 @@ app.use("/credentials",login);
 const home = require("./routes/Home/init");
 app.use("/home",home);
 
+const movies = require("./routes/Movies/init");
+app.use("/movies",movies);
+
+
+
+
 io.on("connection",socket =>{
     console.log("connection made successfull");
     
