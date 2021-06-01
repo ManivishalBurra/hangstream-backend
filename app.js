@@ -35,19 +35,21 @@ io.on("connection",socket =>{
     socket.on("join_room",payload => {
         console.log(payload,"payload");
         const user = userJoin(socket.id,payload.userName,payload.roomId);
-        io.emit('welcome', `${user.username}`);
+        socket.join(user.room);
+        
+        io.to(user.room).emit('welcome', `${user.username}`);
     })
     
     socket.on('message',payload =>{
         console.log("message",payload);
-        io.emit('message',payload);
+        io.to(payload.roomId).emit('message',payload);
     });
 
     socket.on('timing',payload=>{
-        io.emit('timing',payload);
+        io.to(payload.roomId).emit('timing',payload);
     });
     socket.on('typing',payload=>{
-        io.emit("typing",payload);
+        io.to(payload.roomId).emit("typing",payload);
     })
 
 })
