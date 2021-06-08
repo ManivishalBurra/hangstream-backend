@@ -2,7 +2,7 @@ const app = require("express")();
 const User = require("../../models/user")
 const Movie = require("../../models/movie")
 app.post("/",(req,res)=>{
-    if(req.body.source==="admin"){
+    if(req.body.movieName!=="" && req.body.source==="admin"){
     const movie = new Movie({
       movieName:req.body.movieName,
       banner:req.body.banner,
