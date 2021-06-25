@@ -32,6 +32,8 @@ app.use("/home",home);
 const movies = require("./routes/Movies/init");
 app.use("/movies",movies);
 
+const private = require("./routes/Private/init");
+app.use("/private",private);
 
 
 
