@@ -19,9 +19,17 @@ app.use(bodyParser.json())
 
 
 const dburl = "mongodb+srv://hangstream:Muddup3ru!@cluster0.63pom.mongodb.net/hangStreamDB?retryWrites=true&w=majority"
-mongoose.connect(dburl,{useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.connect(dburl,{useNewUrlParser: true,useUnifiedTopology: true },function (err, res) {
+    try {
+        console.log('Connected to Database');
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+});
 mongoose.set("useCreateIndex",true);
 mongoose.set('useFindAndModify', false);
+
 
 const login = require("./routes/login/login.js");
 app.use("/credentials",login);

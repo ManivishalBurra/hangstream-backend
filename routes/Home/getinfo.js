@@ -1,9 +1,9 @@
 const app = require("express")();
 const User = require("../../models/user")
 
-app.post("/",(req,res)=>{
+app.post("/",async (req,res)=>{
     
-    User.find({id:req.body.id},(err,data)=>{
+    await User.find({id:req.body.id},(err,data)=>{
             if(err){
                 console.log(err);
                 res.send(false);
