@@ -1,9 +1,9 @@
 const app = require("express")();
 const Private = require("../../models/private")
-
+const Movie = require("../../models/movie")
 app.post("/",(req,res)=>{
   console.log(req.body.genres);
-    const privatemovie = new Private({
+    const movie = new Movie({
         movieName:req.body.movieName,
         banner:req.body.banner,
         movieUrl:[req.body.url],
@@ -15,7 +15,7 @@ app.post("/",(req,res)=>{
         poster:req.body.image,
         episode:[req.body.movieName]
       });
-      privatemovie.save();
+      movie.save();
    res.send(true)
 })
 
