@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 7000, () => {
+server.listen(process.env.PORT || 7993, () => {
   console.log("im using at port 7000");
 });
 
