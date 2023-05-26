@@ -4,13 +4,6 @@ const app = express();
 const server = require("http").createServer(app);
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
-});
-const { userJoin } = require("./utils/users");
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -46,29 +39,6 @@ app.use("/private", private);
 const notifications = require("./routes/Notifications/init");
 app.use("/notifications", notifications);
 
-io.on("connection", (socket) => {
-  console.log("connection made successfull");
-
-  socket.on("join_room", (payload) => {
-    console.log(payload, "payload");
-    const user = userJoin(socket.id, payload.userName, payload.roomId);
-    socket.join(user.room);
-
-    io.to(user.room).emit("welcome", `${user.username}`);
-  });
-
-  socket.on("message", (payload) => {
-    console.log("message", payload);
-    io.to(payload.roomId).emit("message", payload);
-  });
-
-  socket.on("timing", (payload) => {
-    io.to(payload.roomId).emit("timing", payload);
-  });
-  socket.on("typing", (payload) => {
-    io.to(payload.roomId).emit("typing", payload);
-  });
-});
 
 server.listen(process.env.PORT || 7993, () => {
   console.log("im using at port 7000");
